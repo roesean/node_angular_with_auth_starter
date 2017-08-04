@@ -7,6 +7,7 @@ angular
     config.headers = config.headers || {};
 
     var authData = localStorageService.get('authorizationData');
+    console.log(authData);
     if (authData) {
       config.headers.Authorization = authData.token;
     }

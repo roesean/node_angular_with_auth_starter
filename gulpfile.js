@@ -50,7 +50,7 @@ gulp.task('scripts', function () {
       'app/src/services/authInterceptorService.js',
       'app/src/services/authService.js',
       'app/src/controllers/homeController.js',
-      'app/src/filters/homeFilter.js',
+      'app/src/filters/homeFilter.js'
     ])
     .pipe(plumber(function(err) {
       console.log('');

@@ -26,9 +26,29 @@ app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state("home", {
       url: "/",
-      templateUrl: "./src/views/home.html",
+      templateUrl: "../src/views/home.html",
+      controller: "homeController",
+			// resolve: { authenticate: authenticate },
+      metaTags: {
+        title: "",
+        description: ""
+      }
+    })
+    .state("profile", {
+      url: "/profile",
+      templateUrl: "../src/views/profile.html",
       controller: "homeController",
 			resolve: { authenticate: authenticate },
+      metaTags: {
+        title: "",
+        description: ""
+      }
+    })
+    .state("login", {
+      url: "/login",
+      templateUrl: "../src/views/login.html",
+      controller: "homeController",
+			// resolve: { authenticate: authenticate },
       metaTags: {
         title: "",
         description: ""
@@ -43,17 +63,16 @@ app.config(function ($httpProvider) {
 
 // Load user data into the authService when the app boots up.
 app.run(['authService', function (authService) {
-    authService.fillAuthData();
+    authService.getAuthData();
 }]);
 
 function authenticate($q, authService, $state, $timeout) {
+	console.log(authService.authentication.isAuth);
   if (authService.authentication.isAuth) {
     // Resolve the promise successfully
     return $q.when()
   }
 	else {
-    // The next bit of code is asynchronously tricky.
-
     $timeout(function() {
       // This code runs after the authentication promise has been rejected.
       // Go to the log-in page
